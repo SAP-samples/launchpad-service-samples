@@ -1,0 +1,81 @@
+_schema-version: "3.2"
+ID: MyShellPluginProject
+version: 0.0.1
+modules:
+- name: MyShellPluginProject-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: uaa_MyShellPluginProject
+    parameters:
+      service-key:
+        name: uaa_MyShellPluginProject-key
+  - name: MyShellPluginProject_html_repo_host
+    parameters:
+      service-key:
+        name: MyShellPluginProject_html_repo_host-key
+  - name: MyShellPluginProject-destination-service
+    parameters:
+      content-target: true
+  parameters:
+    content:
+      subaccount:
+        destinations:
+        - Name: MyShellPluginService_MyShellPluginProject_html_repo_host
+          ServiceInstanceName: MyShellPluginProject-html5-app-host-service
+          ServiceKeyName: MyShellPluginProject_html_repo_host-key
+          sap.cloud.service: MyShellPluginService
+        - Authentication: OAuth2UserTokenExchange
+          Name: MyShellPluginService_uaa_MyShellPluginProject
+          ServiceInstanceName: MyShellPluginProject-xsuaa-service
+          ServiceKeyName: uaa_MyShellPluginProject-key
+          sap.cloud.service: MyShellPluginService
+        existing_destinations_policy: update
+  build-parameters:
+    no-source: true
+- name: MyShellPluginProject_ui_deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: MyShellPluginProject_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - MyShellPluginModule-content.zip
+      name: MyShellPluginModule
+      target-path: resources/
+- name: MyShellPluginModule
+  type: html5
+  path: MyShellPluginModule
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+resources:
+- name: MyShellPluginProject-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: destination
+    service-name: MyShellPluginProject-destination-service
+    service-plan: lite
+- name: MyShellPluginProject_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: MyShellPluginProject-html5-app-host-service
+    service-plan: app-host
+- name: uaa_MyShellPluginProject
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: MyShellPluginProject-xsuaa-service
+    service-plan: application
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm install
