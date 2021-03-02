@@ -12,7 +12,7 @@ https://blogs.sap.com/2020/09/17/developing-a-shell-plugin-for-sap-fiori-launchp
 
 [Create an issue](https://github.com/SAP-samples/<repository-name>/issues) in this repository if you find a bug or have questions about the content.
  
-For additional support, [ask a question in SAP Community](https://answers.sap.com/questions/ask.html).
+For additional support, [ask a question in SAP Community](https://answers.sap.com/questions/ask.html) please tag with _SAP Launchpad service_. 
 
 ## License
 Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved. This project is licensed under the Apache Software License, version 2.0 except as noted otherwise in the [LICENSE](LICENSES/Apache-2.0.txt) file.
