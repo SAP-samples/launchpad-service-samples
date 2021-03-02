@@ -1,8 +1,8 @@
 # Title
 Developing a Shell Plugin for SAP Fiori Launchpad service on SAP BTP (Multi-Cloud environment) with SAP Business Application Studio
 ## Description
-Developers can extend the functionality of SAP Fiori Launchpad using Shell Plugins. The concept of plugins allows SAP Fiori implementers to hook into the Launchpad Shell and add new elements like menu items, custom footers, header extensions and many more.
-I will show you how to extend your SAP Fiori Launchpad on SAP Cloud Platform, Cloud Foundry environment via a HTML5 Application/Shell Plugin managed by SAP Cloud Platform, Cloud Foundry environment.
+Developers can extend the functionality of SAP Fiori Launchpad service using Shell Plugins. The concept of plugins allows SAP Fiori implementers to hook into the Launchpad Shell and add new elements like menu items, custom footers, header extensions and many more.
+I will show you how to extend your SAP Fiori Launchpad service on SAP BTP (Multi-Cloud environment) via a HTML5 Application/Shell Plugin managed by SAP BTP.
 In this example we will add a button to the SAP Fiori Launchpad header, which opens a pop-up with some basic information.
 ## Requirements
 Please check this blog post for a step by step guide:
