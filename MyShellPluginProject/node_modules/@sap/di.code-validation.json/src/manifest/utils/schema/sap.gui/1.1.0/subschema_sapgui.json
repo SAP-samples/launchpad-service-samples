@@ -1,0 +1,26 @@
+{
+  "title": "JSON schema for SAP.GUI Namespace",
+
+  "$schema": "http://json-schema.org/draft-04/schema#",
+
+  "description": "Represents GUI specific attributes",
+
+  "type": "object",
+
+  "required": ["_version", "transaction"],
+
+  "additionalProperties": false,
+
+  "properties": {
+    "_version": {
+      "description": "Represents attributes format version. It is managed by namespace owner",
+      "type": "string",
+      "enum" :["1.1.0"]
+    },
+    "transaction": {
+      "description": "Represents transaction of an application",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9\\/\\_]{1,20}$"
+    }
+  }
+}

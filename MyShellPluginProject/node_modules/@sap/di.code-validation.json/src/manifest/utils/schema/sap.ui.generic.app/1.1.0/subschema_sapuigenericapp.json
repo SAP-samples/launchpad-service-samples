@@ -1,0 +1,90 @@
+{
+  "title": "JSON schema for SAP.UI.GENERIC.APP Namespace",
+
+  "$schema": "http://json-schema.org/draft-04/schema#",
+
+  "description": "Represents GENERIC APP specific attributes",
+
+  "type": "object",
+
+  "required": ["_version"],
+  "additionalProperties": false,
+
+  "properties": {
+    "_version": {
+      "type": "string",
+      "enum": [
+        "1.1.0"
+      ]
+    },
+
+    "settings": {
+      "description": "Represents global settings for the application controller",
+      "$ref": "#/definitions/setting_def"
+    },
+
+    "pages": {
+      "description": "Represents one ore more pages of an application. UI5 routing is created from the definitions in this section",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/page"
+      }
+    }
+  },
+
+  "definitions": {
+
+    "setting_def": {
+      "description": "Represents global settings for the application controller",
+      "type": "object"
+    },
+    "component_setting_def": {
+      "description": "Represents the settings specific to one component",
+      "type": "object"
+    },
+    "page": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entitySet","component"],
+      "properties": {
+        "navigationProperty": {
+          "description": "Represents the navigation property that leads to this page. The navigation links of the previous page (the page that calls this one) are determined through this property ",
+          "type": "string"
+        },
+        "entitySet": {
+          "description": "Represents the entity set that defines either the aggregation or the root object of the component",
+          "type": "string"
+        },
+        "component": {
+          "description": "Represents the component and its settings that makes the page",
+          "$ref": "#/definitions/component_def"
+        },
+        "pages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/page"
+          }
+        }
+      }
+    },
+    "component_def": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "description": "The name of the component",
+          "type": "string",
+          "pattern": "^([a-zA-Z][a-zA-Z0-9]{0,39})(\\.[a-zA-Z][a-zA-Z0-9]{0,39})*$"
+        },
+        "list": {
+          "description": "Switch to create a route for a list (aggregation) if true and routing for an entity if not set or false",
+          "type": "boolean"
+        },
+        "settings": {
+          "$ref": "#/definitions/component_setting_def"
+        }
+      }
+    }
+  }
+}

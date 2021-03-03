@@ -1,0 +1,62 @@
+{
+  "title": "JSON schema for SAP.UI Namespace",
+
+  "$schema": "http://json-schema.org/draft-04/schema#",
+
+  "description": "Represents general ui attributes",
+  "type": "object",
+  "required": ["_version", "technology", "deviceTypes","supportedThemes"],
+  "properties": {
+    "_version": {
+      "description": "Represents UI attributes format version. It is managed by namespace owner",
+      "type": "string",
+      "enum" :["1.1.0"]
+    },
+
+    "technology": {
+      "description": "Represents UI technology. The possible values are UI5 (default), WDA, NWBC and URL",
+      "type": "string",
+      "enum": ["UI5", "WDA", "NWBC", "URL"],
+      "default": "UI5"
+    },
+
+    "deviceTypes": {
+      "description": "Represents device types on which application is running. Supported device types are desktop, tablet and phone",
+      "allOf": [
+        {"$ref": "#/definitions/deviceType"},
+        {"required": ["desktop", "tablet", "phone"]}
+      ]
+    },
+
+    "supportedThemes": {
+      "description": "Represents array of supported SAP themes such as sap_hcb, sap_bluecrystal",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+
+  "definitions": {
+    "deviceType": {
+      "type": "object",
+      "description": "Represents device types on which the app is running",
+      "additionalProperties": false,
+      "properties": {
+        "desktop": {
+          "description": "Represents indicator whether desktop device is supported, default true",
+          "type": "boolean"
+        },
+        "tablet": {
+          "description": "Represents indicator whether tablet device is supported, default true",
+          "type": "boolean"
+        },
+        "phone": {
+          "description": "Represents indicator whether phone device is supported, default true",
+          "type": "boolean"
+        }
+      }
+    }
+
+  }
+}

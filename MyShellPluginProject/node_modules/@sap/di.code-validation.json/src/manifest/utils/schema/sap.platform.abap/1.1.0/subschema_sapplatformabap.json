@@ -1,0 +1,22 @@
+{
+  "title": "JSON schema for SAP.PLATFORM.ABAP Namespace",
+
+  "$schema": "http://json-schema.org/draft-04/schema#",
+
+  "description": "Represents ABAP platform specific attributes",
+  "type": "object",
+  "required": ["_version", "uri"],
+  "additionalProperties": false,
+  "properties":{
+    "_version": {
+      "description": "Represents attributes format version. It is managed by namespace owner",
+      "type": "string",
+      "enum" :["1.1.0"]
+    },
+
+    "uri":{
+      "description": "Represents the uri of the app in the ABAP system",
+      "type":"string"
+    }
+  }
+}

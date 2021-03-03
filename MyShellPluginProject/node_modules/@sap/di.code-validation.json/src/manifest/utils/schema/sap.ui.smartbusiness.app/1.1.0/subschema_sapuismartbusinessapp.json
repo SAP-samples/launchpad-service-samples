@@ -1,0 +1,8 @@
+{
+  "title": "JSON schema for SAP.UI.SMARTBUSINESS.APP Namespace",
+
+  "$schema": "http://json-schema.org/draft-04/schema#",
+
+  "description": "Represents specific attributes for Smart Business  ",
+  "type": "object"
+}

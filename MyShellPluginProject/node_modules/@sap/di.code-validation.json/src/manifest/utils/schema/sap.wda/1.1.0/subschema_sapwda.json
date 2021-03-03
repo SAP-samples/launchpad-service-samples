@@ -1,0 +1,31 @@
+{
+  "title": "JSON schema for SAP.WDA Namespace",
+
+  "$schema": "http://json-schema.org/draft-04/schema#",
+
+  "description": "Represents WDA specific attributes",
+
+  "type": "object",
+
+  "required": ["_version", "applicationId"],
+
+  "additionalProperties": false,
+
+  "properties": {
+    "_version": {
+      "description": "Represents attributes format version. It is managed by namespace owner",
+      "type": "string",
+      "enum" :["1.1.0"]
+    },
+    "applicationId": {
+      "description": "Represents ID of an application",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9\\/\\_]{1,30}$"
+    },
+    "configId": {
+      "description": "Represents ID of an application configuration",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9\\/\\_]{1,32}$"
+    }
+  }
+}

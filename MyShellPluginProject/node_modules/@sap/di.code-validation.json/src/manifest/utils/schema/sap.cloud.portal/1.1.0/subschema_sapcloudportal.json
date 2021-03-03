@@ -1,0 +1,9 @@
+{
+  "title": "JSON schema for SAP.CLOUD.PORTAL Namespace",
+
+  "$schema": "http://json-schema.org/draft-04/schema#",
+
+  "description": "Represents Cloud Portal specific attributes",
+
+  "type": "object"
+}

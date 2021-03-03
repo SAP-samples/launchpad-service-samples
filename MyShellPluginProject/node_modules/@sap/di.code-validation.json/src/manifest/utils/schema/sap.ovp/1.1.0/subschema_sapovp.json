@@ -1,0 +1,144 @@
+{
+  "title": "JSON schema for SAP.OVP Namespace",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Represents OVP specific attributes",
+  "type": "object",
+  "required": ["_version", "cards"],
+  "dependencies": {
+    "globalFilterModel": [
+      "globalFilterEntityType"
+    ],
+    "globalFilterEntityType": [
+      "globalFilterModel"
+    ]
+  },
+  "additionalProperties": false,
+  "properties": {
+    "_version": {
+      "description": "Represents attributes format version. It is managed by namespace owner",
+      "type": "string",
+      "enum": ["1.1.0"]
+    },
+    "globalFilterModel": {
+      "description": "Represents the name of global filter OData model, which  contains entities definition that are relevant for global filters",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_\\.\\-\\|\\@]*$"
+    },
+    "globalFilterEntityType": {
+      "description": "Represents the entity to use as global filter in the smart filter bar control",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_\\.\\-\\|\\@]*$"
+    },
+    "cards": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-zA-Z0-9_\\.\\-]+$": {
+          "$ref": "#/definitions/card"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "card": {
+      "description": "Represents the card attributes",
+      "type": "object",
+      "required": ["model", "template"],
+      "additionalProperties": false,
+      "properties": {
+        "model": {
+          "description": "Represents the model for the card",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\.\\-\\|\\@]*$"
+        },
+        "template": {
+          "description": "Represents the card component path to use for this card",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9\\.]+$"
+        },
+        "settings": {
+          "$ref": "#/definitions/card_setting"
+        }
+      }
+    },
+    "card_setting": {
+      "required": [
+        "entitySet"
+      ],
+      "description": "Represents the card specific properties - properties that are passed to the card",
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "category": {
+          "description": "Represents the category of the card- used in the card header",
+          "type": "string",
+          "pattern": "^\\{\\{[^\\W\\.\\-][\\w\\.\\-]*\\}\\}$"
+        },
+        "title": {
+          "description": "Represents language-dependent title of the card - used in the card header",
+          "type": "string",
+          "pattern": "^\\{\\{[^\\W\\.\\-][\\w\\.\\-]*\\}\\}$"
+        },
+        "description": {
+          "description": "Represents language-dependent description of the card - used in the card header",
+          "type": "string",
+          "pattern": "^\\{\\{[^\\W\\.\\-][\\w\\.\\-]*\\}\\}$"
+        },
+        "entitySet": {
+          "description": "Represents the entity set that will be displayed in this card",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9\\_]+$"
+        },
+        "listFlavor": {
+          "description": "Represents the flavor of the list to use in this card. The flavor can be bar chart or standard",
+          "type": "string",
+          "enum": ["standard", "bar"]
+        },
+        "listType": {
+          "description": "Represents the type of list to use for this card. The list can be extended to display more information or condensed to take up less space on the card",
+          "type": "string",
+          "enum": ["extended", "condensed"]
+        },
+        "sortBy": {
+          "description": "Represents the sort key for the entity set",
+          "type": "string"
+        },
+        "sortOrder": {
+          "description": "Represents the sort order for the entity set",
+          "type": "string",
+          "enum": ["ascending", "descending"]
+        },
+        "annotationPath": {
+          "description": "Represents the annotation path",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\.\\-\\|\\@\\#]*$"
+        },
+        "selectionAnnotationPath": {
+          "description": "Represents the selection annotation path",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\.\\-\\|\\@\\#]*$"
+        },
+        "chartAnnotationPath": {
+          "description": "Represents the chart annotation path",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\.\\-\\|\\@\\#]*$"
+        },
+        "presentationAnnotationPath": {
+          "description": "Represents the presentation annotation path",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\.\\-\\|\\@\\#]*$"
+        },
+        "dataPointAnnotationPath": {
+          "description": "Represents the data point annotation path",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\.\\-\\|\\@\\#]*$"
+        },
+        "identificationAnnotationPath": {
+          "description": "Represents the identification annotation path",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\.\\-\\|\\@\\#]*$"
+        }
+      }
+    }
+  }
+}

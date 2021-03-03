@@ -1,16 +1,18 @@
 # Title
-Developing a Shell Plugin for SAP Fiori Launchpad on SAP Cloud Platform, Cloud Foundry environment with SAP Business Application Studio
+Developing a Shell Plugin for SAP Fiori Launchpad service on SAP BTP (Multi-Cloud environment) with SAP Business Application Studio
 ## Description
-Developers can extend the functionality of SAP Fiori Launchpad using Shell Plugins. The concept of plugins allows SAP Fiori implementers to hook into the Launchpad Shell and add new elements like menu items, custom footers, header extensions and many more.
-I will show you how to extend your SAP Fiori Launchpad on SAP Cloud Platform, Cloud Foundry environment via a HTML5 Application/Shell Plugin managed by SAP Cloud Platform, Cloud Foundry environment.
-In this example we will add a button to the SAP Fiori Launchpad header, which opens a pop-up with some basic information.
+Developers can extend the functionality of SAP Fiori Launchpad service using Shell Plugins. The concept of plugins allows SAP Fiori implementers to hook into the Launchpad Shell and add new elements like menu items, custom footers, header extensions and many more. I will show you how to extend your SAP Fiori Launchpad service on SAP BTP (Multi-Cloud environment) via a HTML5 Application/Shell Plugin managed by SAP BTP. In this example we will add a button to the SAP Fiori Launchpad header, which opens a pop-up with some basic information.
 ## Requirements
 Please check this blog post for a step by step guide:
 https://blogs.sap.com/2020/09/17/developing-a-shell-plugin-for-sap-fiori-launchpad-on-sap-cloud-platform-cloud-foundry-environment-with-sap-business-application-studio
 
+## Download and Installation
+To clone the repository in your SAP Business Application Studio please check this blog post:
+https://blogs.sap.com/2020/10/03/working-with-github-in-sap-business-application-studio-next-generation-of-sap-web-ide/
+
 ## How to obtain support
 
-[Create an issue](https://github.com/SAP-samples/<repository-name>/issues) in this repository if you find a bug or have questions about the content.
+[Create an issue](https://github.com/SAP-samples/launchpad-service-samples/issues) in this repository if you find a bug or have questions about the content.
  
 For additional support, [ask a question in SAP Community](https://answers.sap.com/questions/ask.html).
 
