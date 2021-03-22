@@ -1,19 +1,9 @@
-//Boostrap Google Analytics
-(function(i, s, o, g, r, a, m) {
-	i['GoogleAnalyticsObject'] = r;
-	i[r] = i[r] || function() {
-		(i[r].q = i[r].q || []).push(arguments)
-	}, i[r].l = 1 * new Date();
-	a = s.createElement(o), m = s.getElementsByTagName(o)[0];
-	a.async = 1;
-    a.src = g;
-    a.crossorigin= "anonymous";
-	m.parentNode.insertBefore(a, m)
-})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
 sap.ui.define([
-	"sap/ui/core/UIComponent"
-], function (UIComponent) {
+	"sap/ui/core/UIComponent",
+	"sap/m/Dialog",
+	"sap/m/Text",
+	"sap/m/Button"
+], function (UIComponent,Dialog,Text,Button) {
 	"use strict";
 
 	return UIComponent.extend("ns.MyShellPluginModule.Component", {
@@ -28,31 +18,66 @@ sap.ui.define([
 		 * @override
 		 */
 		init: function () {
-            UIComponent.prototype.init.apply(this, arguments);
-            this.initGoogleAnalytics();
+            var rendererPromise = this._getRenderer();
+            rendererPromise.then(function(oRenderer) {
+            	oRenderer.addHeaderItem({
+            		icon: "sap-icon://add",
+            		tooltip: "Add bookmark",
+            		press: function() {
+            			var oDialog = new Dialog({
+            				contentWidth: "25rem",
+            				title: "Whats new",
+            				type: "Message",
+            				content: new Text({
+            					text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            				}),
+            				beginButton: new Button({
+            					type: "Emphasized",
+            					text: "Ok",
+            					press: function() {
+            						oDialog.close();
+            					}
+            				}),
+            				afterClose: function() {
+            					oDialog.destroy();
+            				}
+            			});
+            			oDialog.open();
+            		}
+            	})
+            })
 		},
 
-        initGoogleAnalytics: function() {
-			//Get GA tracking ID from Portal configuration
-			var trackingID = "UA-184478963-5";
-            //Initalize the tracker
-            ga('create', trackingID, 'auto');
-            this.registerPortalSiteNavigationEvents();
-		},
-		
-		registerPortalSiteNavigationEvents: function(){
-			//Track app and page navigation events
-            var AppLifeCycle = sap.ushell.Container.getService("AppLifeCycle");
-            AppLifeCycle.attachAppLoaded(function(oEvent){
-                var oParameters = oEvent.getParameters();
-                oParameters.getIntent().then(function(event){
-                    var sSenanticObject = event.semanticObject;
-                    ga('send', 'pageview', {
-						'page': sSenanticObject
-					});
-                });
-                
-            }.bind(this));
-        }
+		_getRenderer: function () {
+			var that = this,
+				oDeferred = new jQuery.Deferred(),
+				oRenderer;
+
+
+			that._oShellContainer = jQuery.sap.getObject("sap.ushell.Container");
+			if (!that._oShellContainer) {
+				oDeferred.reject(
+					"Illegal state: shell container not available; this component must be executed in a unified shell runtime context.");
+			} else {
+				oRenderer = that._oShellContainer.getRenderer();
+				if (oRenderer) {
+					oDeferred.resolve(oRenderer);
+				} else {
+					// renderer not initialized yet, listen to rendererCreated event
+					that._onRendererCreated = function (oEvent) {
+						oRenderer = oEvent.getParameter("renderer");
+						if (oRenderer) {
+							oDeferred.resolve(oRenderer);
+						} else {
+							oDeferred.reject("Illegal state: shell renderer not available after recieving 'rendererLoaded' event.");
+						}
+					};
+					that._oShellContainer.attachRendererCreatedEvent(that._onRendererCreated);
+				}
+			}
+			return oDeferred.promise();
+		}
+
+
 	});
 });
