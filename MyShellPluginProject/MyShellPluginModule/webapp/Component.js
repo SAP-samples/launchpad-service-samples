@@ -44,8 +44,8 @@ sap.ui.define([
             			});
             			oDialog.open();
             		}
-            	})
-            })
+            	}, true, true);
+            });
 		},
 
 		_getRenderer: function () {
