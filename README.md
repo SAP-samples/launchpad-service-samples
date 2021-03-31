@@ -1,3 +1,5 @@
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/launchpad-service-samples)](https://api.reuse.software/info/github.com/SAP-samples/launchpad-service-samples)
+
 # Developing a Shell Plugin for SAP Fiori Launchpad Service on SAP BTP (Multi-Cloud Environment) with SAP Business Application Studio
 
 ## Description
